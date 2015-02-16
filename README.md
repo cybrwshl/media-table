@@ -5,11 +5,10 @@ This project is about a small Ikea-like table that has a 15" monitor built in. T
 
 ### Requirements
 
-First of all you need a working python 3.4 installation. Afterwards you have to install [`django`](https://pypi.python.org/pypi/Django/) and [`django-widget-tweaks`](https://pypi.python.org/pypi/django-widget-tweaks/).
+First of all you need a working python 3.4 installation. Afterwards you have to install [`django`](https://pypi.python.org/pypi/Django/), [`django-widget-tweaks`](https://pypi.python.org/pypi/django-widget-tweaks/), [`django-bootstrap3`](https://pypi.python.org/pypi/django-bootstrap3) and [`django-admin-bootstrapped`](https://pypi.python.org/pypi/django-admin-bootstrapped/).
 
 ```
-pip install django
-pip install django-widget-tweaks
+pip install django django-widget-tweaks django-bootstrap3 django-admin-bootstrapped
 ```
 
 ### Installation Instructions
