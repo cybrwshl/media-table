@@ -4,7 +4,10 @@ import threading
 import json
 
 import pygame
+
 import zmq
+
+from myscreen import MyScreen
 
 
 if not pygame.font:
@@ -13,6 +16,7 @@ if not pygame.font:
 if not pygame.mixer:
     print 'Warning, sound disabled'
 
+FRAMES = 30
 COLORCHANGE = pygame.USEREVENT + 1
 
 
@@ -42,7 +46,9 @@ def json_to_rgb(data):
 
 def main():
     pygame.init()
-    screen = pygame.display.set_mode((1024, 768), pygame.HWSURFACE | pygame.FULLSCREEN)
+    screen = pygame.display.set_mode((1024, 768), pygame.HWSURFACE | pygame.DOUBLEBUF | pygame.FULLSCREEN)
+
+    myscreen = MyScreen(screen, (0, 0, 0))
 
     pygame.display.set_caption("")
     pygame.mouse.set_visible(0)
@@ -58,7 +64,7 @@ def main():
     running = True
 
     while running:
-        clock.tick(30)
+        clock.tick(FRAMES)
 
         for event in pygame.event.get():
 
@@ -70,11 +76,10 @@ def main():
                     pygame.event.post(pygame.event.Event(pygame.QUIT))
 
             if event.type == COLORCHANGE:
-                try:
-                    screen.fill(json_to_rgb(event.message))
-                except AssertionError, e:
-                    print e
+                r, g, b = json_to_rgb(event.message)
+                myscreen.__fade_color__((r, g, b), FRAMES * 5)
 
+        myscreen.__tick__()
         pygame.display.flip()
 
 
