@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -30,26 +31,26 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    'bootstrap3',
-    'django_admin_bootstrapped',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'widget_tweaks',
-    'mediatable_web',
+	'bootstrap3',
+	'django_admin_bootstrapped',
+	'django.contrib.admin',
+	'django.contrib.auth',
+	'django.contrib.contenttypes',
+	'django.contrib.sessions',
+	'django.contrib.messages',
+	'django.contrib.staticfiles',
+	'widget_tweaks',
+	'mediatable_web',
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+	'django.contrib.sessions.middleware.SessionMiddleware',
+	'django.middleware.common.CommonMiddleware',
+	'django.middleware.csrf.CsrfViewMiddleware',
+	'django.contrib.auth.middleware.AuthenticationMiddleware',
+	'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+	'django.contrib.messages.middleware.MessageMiddleware',
+	'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'mediatable.urls'
@@ -61,10 +62,10 @@ WSGI_APPLICATION = 'mediatable.wsgi.application'
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+	'default': {
+		'ENGINE': 'django.db.backends.sqlite3',
+		'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+	}
 }
 
 # Internationalization
@@ -86,38 +87,37 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': 'debug.log',
-            'formatter': 'verbose',
-        },
-    },
-    'formatters': {
-        'verbose': {
-            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
-            'datefmt' : "%d/%b/%Y %H:%M:%S"
-        },
-        'simple': {
-            'format': '%(levelname)s %(message)s'
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers':['file'],
-            'propagate': True,
-            'level':'DEBUG',
-        },
-        'mediatable_web': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-        },
-    }
+	'version': 1,
+	'disable_existing_loggers': False,
+	'handlers': {
+		'file': {
+			'level': 'DEBUG',
+			'class': 'logging.FileHandler',
+			'filename': 'debug.log',
+			'formatter': 'verbose',
+		},
+	},
+	'formatters': {
+		'verbose': {
+			'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+			'datefmt': "%d/%b/%Y %H:%M:%S"
+		},
+		'simple': {
+			'format': '%(levelname)s %(message)s'
+		},
+	},
+	'loggers': {
+		'django': {
+			'handlers': ['file'],
+			'propagate': True,
+			'level': 'DEBUG',
+		},
+		'mediatable_web': {
+			'handlers': ['file'],
+			'level': 'DEBUG',
+		},
+	}
 }
 
 DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer'

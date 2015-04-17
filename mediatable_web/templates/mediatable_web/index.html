@@ -9,94 +9,96 @@
     {% load widget_tweaks %}
     {% load staticfiles %}
 
-    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}mediatable_web/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}mediatable_web/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}mediatable_web/css/bootstrap-slider.css" />
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}mediatable_web/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}mediatable_web/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}mediatable_web/css/bootstrap-slider.css"/>
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my-navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand glyphicon glyphicon-home" href=""></a>
-            </div>
-            <div class="collapse navbar-collapse" id="my-navbar">
-                <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="">Einzelfarbe</a>
-                    </li>
-                </ul>
-            </div>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand glyphicon glyphicon-home" href=""></a>
         </div>
-    </nav>
+        <div class="collapse navbar-collapse" id="my-navbar">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="">Einzelfarbe</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-    <div class="page-header">
-        <h1>Einzelfarbe</h1>
+<div class="page-header">
+    <h1>Einzelfarbe</h1>
+</div>
+
+<form action="" method="post">
+    {% csrf_token %}
+
+    <div class="well">
+
+        <div>
+            <span class="col-md-3 col-sm-3 col-xs-3">Rot</span>
+            <!--name korreliert mit dem Feld aus der Forms Klasse (SimpleColorForm.red)-->
+            <input type="text" class="col-md-9 col-sm-9 col-xs-9" data-slider-value="{{ red }}" data-slider-max="255"
+                   data-slider-tooltip="hide" id="slider-red" name="red">
+        </div>
+
+        <div>
+            <span class="col-md-3 col-sm-3 col-xs-3">Grün</span>
+            <input type="text" class="col-md-9 col-sm-9 col-xs-9" data-slider-value="{{ green }}" data-slider-max="255"
+                   data-slider-tooltip="hide" id="slider-green" name="green">
+        </div>
+
+        <div>
+            <span class="col-md-3 col-sm-3 col-xs-3">Blau</span>
+            <input type="text" class="col-md-9 col-sm-9 col-xs-9" data-slider-value="{{ blue }}" data-slider-max="255"
+                   data-slider-tooltip="hide" id="slider-blue" name="blue">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Speichern</button>
     </div>
 
-    <form action="" method="post">
-        {% csrf_token %}
 
-        <div class="well">
-
-            <div>
-                <span class="col-md-3 col-sm-3 col-xs-3">Rot</span>
-                <!--name korreliert mit dem Feld aus der Forms Klasse (SimpleColorForm.red)-->
-                <input type="text" class="col-md-9 col-sm-9 col-xs-9" data-slider-value="{{ red }}" data-slider-max="255" data-slider-tooltip="hide" id="slider-red" name="red">
-            </div>
-
-            <div>
-                <span class="col-md-3 col-sm-3 col-xs-3">Grün</span>
-                <input type="text" class="col-md-9 col-sm-9 col-xs-9" data-slider-value="{{ green }}" data-slider-max="255" data-slider-tooltip="hide" id="slider-green" name="green">
-            </div>
-
-            <div>
-                <span class="col-md-3 col-sm-3 col-xs-3">Blau</span>
-                <input type="text" class="col-md-9 col-sm-9 col-xs-9" data-slider-value="{{ blue }}" data-slider-max="255" data-slider-tooltip="hide" id="slider-blue" name="blue">
-            </div>
-
-            <button type="submit" class="btn btn-primary">Speichern</button>
-        </div>
+    <div class="well" id="RGB">
+        <p class="col-md-12 col-sm-12 col-xs-12"></p>
+    </div>
+</form>
 
 
-        <div class="well" id="RGB">
-            <p class="col-md-12 col-sm-12 col-xs-12"></p>
-        </div>
-    </form>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}mediatable_web/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}mediatable_web/js/bootstrap-slider.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        // live preview of the color
+        var rgbChange = function () {
+            $('#RGB').css('background', 'rgb(' + r.getValue() + ',' + g.getValue() + ',' + b.getValue() + ')');
+        }
+
+        // initialize sliders
+        $("#slider-red").slider().on('slide', rgbChange);
+        $("#slider-green").slider().on('slide', rgbChange);
+        $("#slider-blue").slider().on('slide', rgbChange);
+
+        var r = $("#slider-red").data("slider");
+        var g = $("#slider-green").data("slider");
+        var b = $("#slider-blue").data("slider");
+
+        $('#RGB').css('background', 'rgb({{ red }}, {{ green }}, {{ blue }})');
+    })
 
 
-
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}mediatable_web/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="{{STATIC_URL}}mediatable_web/js/bootstrap-slider.js"></script>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            // live preview of the color
-            var rgbChange = function () {
-                $('#RGB').css('background', 'rgb(' + r.getValue() + ',' + g.getValue() + ',' + b.getValue() + ')');
-            }
-
-            // initialize sliders
-            $("#slider-red").slider().on('slide', rgbChange);
-            $("#slider-green").slider().on('slide', rgbChange);
-            $("#slider-blue").slider().on('slide', rgbChange);
-
-            var r = $("#slider-red").data("slider");
-            var g = $("#slider-green").data("slider");
-            var b = $("#slider-blue").data("slider");
-
-            $('#RGB').css('background', 'rgb({{ red }}, {{ green }}, {{ blue }})');
-        })
-
-
-    </script>
+</script>
 
 </body>
 </html>
